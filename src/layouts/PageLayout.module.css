@@ -1,0 +1,37 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--colors__background);
+    padding: 0 1.7rem;
+    margin: 4rem 8rem 0;
+    border-radius: 15px;
+    align-items: center;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    width: 95%;
+    border-bottom: 0.2rem solid var(--colors__accent);
+    margin: 1rem 0;
+}
+
+.item2 {
+    border-left: 0.2rem solid var(--colors__accent);
+    max-height: 100%;
+    margin-bottom: 1rem;
+}
+
+.content {
+    display: flex;
+    gap: 1rem;
+}
+
+.sidebar {
+    width: 34rem;
+}
+
+.outlet {
+    width: 90rem;
+}

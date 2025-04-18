@@ -1,0 +1,150 @@
+:root {
+
+  --colors__background: #382833;
+  --colors__inside: #b7a99f;
+  --colors__border: #593e43;
+  --colors__accent: #e0d9c4;
+  --colors__white: #f8f7f5;
+
+  .color1 {
+    color: #361e1c;
+  }
+
+  .color2 {
+    color: #51322a;
+  }
+
+  .color3 {
+    color: #76503c;
+  }
+
+  .color4 {
+    color: #a47953;
+  }
+
+  .color5 {
+    color: #daae71;
+  }
+
+  .color1 {
+    color: #85605d;
+  }
+
+  .color2 {
+    color: #8f7b6d;
+  }
+
+  .color3 {
+    color: #b1a695;
+  }
+
+  .color4 {
+    color: #dad6cc;
+  }
+
+  .color5 {
+    color: #f8f9f6;
+  }
+
+  .color1 {
+    color: #382833;
+  }
+
+  .color2 {
+    color: #593e43;
+  }
+
+  .color3 {
+    color: #7e646c;
+  }
+
+  .color4 {
+    color: #b7a99f;
+  }
+
+  .color5 {
+    color: #e0d9c4;
+  }
+}
+
+/*
+--colors__background: #c39d8a;
+  --colors__inside: #71544c;
+  --colors__border: #efe2d1;
+  --colors__accent: #ebb9a0;
+  --colors__white: #f8f7f5;
+*/
+
+html {
+  font-size: 10px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: 'Cormorant Garamond', serif;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  background-image: url(https://img.freepik.com/free-vector/seamless-pattern-with-cinema-elements_225004-1154.jpg);
+  background-color: #b08791;
+  opacity: 0.98;
+  color: var(--colors__white);
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+article>*+* {
+  margin-top: 1em;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+input:focus {
+  outline: none;
+  color: var(--colors__white);
+}

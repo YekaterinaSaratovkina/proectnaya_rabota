@@ -1,0 +1,29 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    padding: 1rem 0.5rem 1rem 1rem;
+    font-size: 1.4rem;
+    color: var(--colors__white);
+    border-radius: 15px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: var(--colors__accent);
+    border: none;
+}
+
+.iconWrapper {
+    background-color: var(--colors__accent);
+    padding: 1rem 1.5rem 1rem 0.5rem;
+    border-radius: 15px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.icon {
+    width: 2rem;
+    height: 1.6rem;
+    color: var(--colors__border);
+}

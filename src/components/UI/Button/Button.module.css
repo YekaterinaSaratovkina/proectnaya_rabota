@@ -1,0 +1,16 @@
+.custom_button {
+    background-color: #d7c9b1;
+    color: #2e1d27;
+    font-family: 'Georgia', serif;
+    border: 2px solid #2e1d27;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.custom_button:hover {
+    background-color: #cbbda5;
+    color: #000;
+}
