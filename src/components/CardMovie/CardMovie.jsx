@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Poster from '../../assets/images/poster.jpg'
 import styles from './CardMovie.module.css'
+import Button from '../UI/Button/Button'
 
 const CardMovie = ({
     title,
@@ -13,6 +14,7 @@ const CardMovie = ({
     description,
     persons,
 }) => {
+    const [expanded, setExpanded] = useState(false);
     return (
         <div className={styles.container}>
             <img className={styles.poster} src={poster ?? Poster} alt={title} />
@@ -32,14 +34,23 @@ const CardMovie = ({
                 <h3>
                     <strong>Жанр:</strong> {genres ?? 'нет информации'}
                 </h3>
-                <h3>
-                    <strong>Описание:</strong> {description ?? 'нет информации'}
-                </h3>
-                <h3>
-                    <strong>Актеры:</strong> {persons ?? 'нет информации'}
-                </h3>
+                <div className={`${styles.clampBlock} ${expanded ? styles.expanded : ''}`}>
+                    <h3>
+                        <strong>Описание:</strong> {description ?? 'нет информации'}
+                    </h3>
+                    <h3>
+                        <strong>Актеры:</strong> {persons ?? 'нет информации'}
+                    </h3>
+                </div>
+                    <button className={styles.showMore} onClick={() => setExpanded(!expanded)}>
+                        {expanded ? 'Скрыть' : 'Показать больше'}
+                    </button>
+                <div className={styles.buttonGroup}>
+                    <Button name={'Смотреть фильм'} />
+                    <Button name={'Добавить избранное'} />
+                </div>
             </div>
-        </div>
+        </div >
     )
 }
 

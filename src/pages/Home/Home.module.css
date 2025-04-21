@@ -21,11 +21,19 @@
     color: var(--colors__border);
     margin: 0;
 }
+.noResults{
+    font-size: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    color: #e4d9be;
+}
 
 .pagination {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
     gap: 1rem;
+    font-size: 1.2rem;
     font-family: 'Montserrat', sans-serif;
 }
 

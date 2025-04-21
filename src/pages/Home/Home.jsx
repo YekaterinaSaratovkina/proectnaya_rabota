@@ -23,6 +23,10 @@ const Home = () => {
     enabled: !!searchValue,
   });
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [page, searchValue]);
+
   if (filmsIsLoading || searchIsLoading) {
     return <div className={styles.loading}>Загрузка...</div>;
   }
@@ -30,27 +34,18 @@ const Home = () => {
   return (
     <div>
       <div className={styles.header}>
-        <h1 className={styles.titel}>{searchValue ? `Результаты поиска по запросу: "${searchValue}"` : "Возможно вам понравится:"}</h1>
+        <h1 className={styles.titel}>
+          {searchValue
+            ? `Результаты поиска по запросу: "${searchValue}"`
+            : "Возможно вам понравится:"}
+        </h1>
+        {searchValue && searchFilmsData?.docs.length === 0 && (
+          <div className={styles.noResults}>По вашему запросу ничего не найдено.</div>
+        )}
       </div>
 
       {searchFilmsData && searchFilmsData.docs.length > 0 ? (
         <>
-          <div className={styles.pagination}>
-            <button
-              disabled={page === 1}
-              onClick={() => setPage((prev) => prev - 1)}
-            >
-              Назад
-            </button>
-            <span>Страница: {page}</span>
-            <button
-              disabled={page === searchFilmsData.pages}
-              onClick={() => setPage((prev) => prev + 1)}
-            >
-              Вперёд
-            </button>
-          </div>
-
           <div className={styles.cards}>
             {searchFilmsData.docs.map((film) => (
               <CardMovie
@@ -60,10 +55,10 @@ const Home = () => {
                 poster={film.poster?.url}
                 year={film.year}
                 description={film.description}
-                persons={film.persons?.map((p) => p.name).join(", ")}
+                persons={film.persons?.map((a) => a.name).join(", ")}
                 rating={film.rating?.imdb}
-                countries={film.countries?.map((c) => c.name)}
-                genres={film.genres?.map((g) => g.name).join(", ")}
+                countries={film.countries?.map((b) => b.name)}
+                genres={film.genres?.map((c) => c.name).join(", ")}
               />
             ))}
           </div>
@@ -71,20 +66,41 @@ const Home = () => {
       ) : (
         randomFilmsData && (
           <CardMovie
+            key={randomFilmsData.id}
             title={randomFilmsData.name}
             alternativeTitle={randomFilmsData.alternativeName}
             poster={randomFilmsData.poster?.url}
             year={randomFilmsData.year}
             description={randomFilmsData.description}
-            persons={randomFilmsData.persons?.map((p) => p.name).join(", ")}
+            persons={randomFilmsData.persons?.map((a) => a.name).join(", ")}
             rating={randomFilmsData.rating?.imdb}
-            countries={randomFilmsData.countries?.map((c) => c.name)}
-            genres={randomFilmsData.genres?.map((g) => g.name).join(", ")}
+            countries={randomFilmsData.countries?.map((b) => b.name)}
+            genres={randomFilmsData.genres?.map((c) => c.name).join(", ")}
           />
         )
+      )}
+      {searchValue && (
+        <div className={styles.pagination}>
+          <button
+            disabled={page === 1}
+            onClick={() => setPage((prev) => prev - 1)}
+          >
+            Назад
+          </button>
+          <span>Страница: {page}</span>
+          <button
+            disabled={page === searchFilmsData.pages}
+            onClick={() => setPage((prev) => prev + 1)}
+          >
+            Вперёд
+          </button>
+        </div>
       )}
     </div>
   );
 };
 
 export default Home;
+//переход на рандомный фильм при удалении параметров поиска
+// перенос кнопок и дизайн
+// переход к началу страницы при перелистывании страницы

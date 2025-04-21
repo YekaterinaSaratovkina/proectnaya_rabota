@@ -1,11 +1,21 @@
 import React from 'react'
+import classNames from 'classnames';
 import styles from './Button.module.css'
 
 const Button = ({
-  ganer,
+  name,
+  onClick,
+  variant = 'dark', // 'light' или 'dark
 }) => {
+  const buttonClass = classNames(
+    styles.buttonBase,
+    {
+      [styles.buttonLight]: variant === 'light',
+      [styles.buttonDark]: variant === 'dark',
+    }
+  );
   return (
-    <button className={styles.custom_button}>{ganer}</button>
+    <button className={buttonClass} onClick={onClick}>{name}</button>
   )
 }
 
