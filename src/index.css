@@ -116,7 +116,7 @@ body {
   background-image: url(https://img.freepik.com/free-vector/seamless-pattern-with-cinema-elements_225004-1154.jpg);
   background-color: #b08791;
   opacity: 0.98;
-  color: var(--colors__white);
+  color: black;
 }
 
 ul[class],
