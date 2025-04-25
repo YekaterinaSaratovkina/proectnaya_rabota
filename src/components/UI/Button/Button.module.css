@@ -1,30 +1,65 @@
 .buttonBase {
-    font-family: 'Montserrat', sans-serif;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    border: 2px solid;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  letter-spacing: 0.04rem;
+  border: 2px solid transparent;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.5rem;
+  line-height: 1.3;
 }
 
 .buttonLight {
-    background-color: #d7c9b1;
-    color: #2e1d27;
-    border-color: #2e1d27;
+  background-color: #e8e4de;
+  color: #2a1a1f;
+  border-color: #cfc9c1;
 }
 
 .buttonLight:hover {
-    background-color: #cbbda5;
-    color: #000;
+  background-color: #ddd7d2;
+}
+
+.buttonLight:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .buttonDark {
-    background-color: #2e1d27;
-    color: #f3efe6;
-    border-color: #f3efe6;
+  background-color: #4b1e2f;
+  color: #f8f8f8;
+  border-color: #361421;
 }
 
 .buttonDark:hover {
-    background-color: #4a2f3a;
-    color: #fff;
+  background-color: #5c253a;
+}
+
+.buttonDark:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.buttonOutline {
+  background-color: transparent;
+  color: #4b1e2f;
+  border: 2px solid #4b1e2f;
+}
+
+.buttonOutline:hover {
+  background-color: #4b1e2f;
+  color: #ffffff;
+}
+
+.buttonOutline:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }

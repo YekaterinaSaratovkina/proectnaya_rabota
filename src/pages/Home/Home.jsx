@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Home.module.css';
 import { useQuery } from '@tanstack/react-query';
 import { getRandomFilmsApi } from '../../features/films/api/getRandomFilmsApi/getRandomFilmsApi';
@@ -17,9 +17,8 @@ const Home = () => {
     rating: null,
     age: null,
     country: null,
-    
   });
-  
+
   useEffect(() => {
     setFilters({
       genre: searchParams.get("genre"),
@@ -28,10 +27,11 @@ const Home = () => {
       country: searchParams.get("country"),
     });
   }, [searchParams]);
-  
+
   useEffect(() => {
-    console.log("Актуальные фильтры:", filters);
-  }, [filters]);
+    setPage(1);
+  }, [filters, searchValue]);
+
   const { data: randomFilmsData, isLoading: filmsIsLoading } = useQuery({
     queryKey: ["randomFilms"],
     queryFn: getRandomFilmsApi,
@@ -44,18 +44,18 @@ const Home = () => {
     enabled: !!searchValue
   });
 
-  const shouldUseFilters = Object.values(filters).some(Boolean) && !searchValue;
+
+  const apply = searchParams.get("apply") === "true";
+  const shouldUseFilters = apply && Object.values(filters).some(Boolean) && !searchValue;
 
   const { data: filteredFilmsData, isLoading: filterIsLoading } = useQuery({
-    queryKey: ["filteredFilms", filters],
-    queryFn: () => getFilmByFilters(filters),
+    queryKey: ["filteredFilms", filters, page],
+    queryFn: () => getFilmByFilters(filters, page),
     enabled: shouldUseFilters,
     keepPreviousData: true,
     staleTime: 1000 * 60,
   });
-  
-console.log("filteredFilmsData", filteredFilmsData);
-
+  console.log(filteredFilmsData);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -64,19 +64,18 @@ console.log("filteredFilmsData", filteredFilmsData);
   if (filmsIsLoading || searchIsLoading || filterIsLoading) {
     return <div className={styles.loading}>Загрузка...</div>;
   }
-  console.log(filteredFilmsData)
   const renderFilms = () => {
     if (searchValue && searchFilmsData?.docs?.length > 0) {
       return searchFilmsData.docs.map((film) => (
         <CardMovie
           key={film.id}
+          id={film.id}
           title={film.name}
           alternativeTitle={film.alternativeName}
           poster={film.poster?.url}
           year={film.year}
           description={film.description}
-          persons={film.persons?.map((a) => a.name).join(", ")}
-          rating={film.rating?.imdb || film.rating?.kp}
+          rating={Number((film.rating?.kp ?? film.rating?.imdb)?.toFixed(1))}
           countries={film.countries?.map((b) => b.name)}
           genres={film.genres?.map((c) => c.name).join(", ")}
         />
@@ -87,13 +86,13 @@ console.log("filteredFilmsData", filteredFilmsData);
       return filteredFilmsData.docs.map((film) => (
         <CardMovie
           key={film.id}
+          id={film.id}
           title={film.name}
           alternativeTitle={film.alternativeName}
           poster={film.poster?.url}
           year={film.year}
           description={film.description}
-          persons={film.persons?.map((a) => a.name).join(", ")}
-          rating={film.rating?.imdb || film.rating?.kp}
+          rating={Number((film.rating?.kp ?? film.rating?.imdb)?.toFixed(1))}
           countries={film.countries?.map((b) => b.name)}
           genres={film.genres?.map((c) => c.name).join(", ")}
         />
@@ -104,13 +103,13 @@ console.log("filteredFilmsData", filteredFilmsData);
       return (
         <CardMovie
           key={randomFilmsData.id}
+          id={randomFilmsData.id}
           title={randomFilmsData.name}
           alternativeTitle={randomFilmsData.alternativeName}
           poster={randomFilmsData.poster?.url}
           year={randomFilmsData.year}
           description={randomFilmsData.description}
-          persons={randomFilmsData.persons?.map((a) => a.name).join(", ")}
-          rating={randomFilmsData.rating?.imdb || randomFilmsData.rating?.kp}
+          rating={Number((randomFilmsData.rating?.kp ?? randomFilmsData.rating?.imdb)?.toFixed(1))}
           countries={randomFilmsData.countries?.map((b) => b.name)}
           genres={randomFilmsData.genres?.map((c) => c.name).join(", ")}
         />
@@ -148,6 +147,24 @@ console.log("filteredFilmsData", filteredFilmsData);
           <span>Страница: {page}</span>
           <button
             disabled={page === searchFilmsData.pages}
+            onClick={() => setPage((prev) => prev + 1)}
+          >
+            Вперёд
+          </button>
+        </div>
+      )}
+
+      {shouldUseFilters && filteredFilmsData?.pages > 1 && (
+        <div className={styles.pagination}>
+          <button
+            disabled={page === 1}
+            onClick={() => setPage((prev) => prev - 1)}
+          >
+            Назад
+          </button>
+          <span>Страница: {page}</span>
+          <button
+            disabled={page === filteredFilmsData.pages}
             onClick={() => setPage((prev) => prev + 1)}
           >
             Вперёд

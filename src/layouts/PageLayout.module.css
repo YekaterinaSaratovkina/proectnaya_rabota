@@ -35,3 +35,28 @@
 .outlet {
     width: 90rem;
 }
+
+@media (max-width: 420px) {
+    .wrapper {
+        margin: 2rem 1rem 0;
+        padding: 0 1rem;
+        border-radius: 10px;
+    }
+
+    .content {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .item2 {
+        display: none;
+    }
+
+    .outlet {
+        width: 100%;
+    }
+}

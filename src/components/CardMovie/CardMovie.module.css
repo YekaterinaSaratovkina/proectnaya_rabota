@@ -1,116 +1,147 @@
 .container {
-    display: flex;
-    gap: 2rem;
-    padding: 2rem;
-    margin: 2rem auto;
-    border-radius: 1rem;
-    background-color: var(--colors__accent);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    line-height: 1.6;
-    max-width: 1000px;
-    align-items: stretch;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .poster {
-    width: 300px;
-    height: 450px;
-    border-radius: 1rem;
-    object-fit: cover;
-    flex-shrink: 0;
-  }
-  
-  .info {
-    flex: 1;
-    max-width: 600px;
-    display: flex;
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  margin: 2rem auto;
+  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 1000px;
+  align-items: stretch;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  color: #f5f5f5;
+  transition: transform 0.2s ease;
+}
+
+.container:hover {
+  transform: scale(1.01);
+}
+
+.poster {
+  width: 240px;
+  height: 390px;
+  border-radius: 1rem;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.info {
+  flex: 1;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #f5f5f5;
+}
+
+.movie_title {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.rating {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 0.3rem;
+  color: #ffe082;
+}
+
+.info h2,
+.info h3 {
+  margin: 0.3rem 0;
+  font-weight: 500;
+  font-size: 18px;
+  color: #f0f0f0;
+}
+
+.info strong {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.clampBlock {
+  max-height: 120px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  color: #ccc;
+}
+
+.expanded {
+  max-height: 1000px;
+}
+
+.showMore {
+  background: none;
+  border: none;
+  color: #f0f0f0;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  align-self: flex-start;
+  font-family: 'Montserrat', sans-serif;
+  padding: 0;
+  font-size: 16px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.button_watchLater {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+@media (max-width: 420px) {
+  .container {
     flex-direction: column;
-    justify-content: space-between;
-    color: var(--colors__border);
+    padding: 1rem;
+    margin: 1rem auto;
   }
-  
+
+  .poster {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+
+  .info {
+    max-width: 100%;
+  }
+
   .movie_title {
-    font-family: 'Cinzel', serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--colors__border);
-    margin-bottom: 0.5rem;
-  }
-  
-  .rating {
-    font-weight: bold;
     font-size: 20px;
   }
-  
+
+  .rating {
+    font-size: 18px;
+  }
+
   .info h2,
   .info h3 {
-    margin: 0.3rem 0;
-  }
-  
-  .info strong {
-    font-weight: 600;
-    color: #2e1d27;
-  }
-  
-  .clampBlock {
-    max-height: 120px;
-    overflow: hidden;
-    position: relative;
-    transition: max-height 0.3s ease;
-  }
-  
-  .expanded {
-    max-height: 1000px;
-  }
-  
-  .showMore {
-    background: none;
-    border: none;
-    color: #2e1d27;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 0.5rem;
-    align-self: flex-start;
-    font-family: 'Montserrat', sans-serif;
-    padding: 0;
-  }
-  
-  .buttonGroup {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-    flex-wrap: wrap;
-  }
-  
-  button {
-    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
-    font-weight: 500;
-    padding: 10px 20px;
-    color: #2e1d27;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
   }
-  
-  button:hover {
-    background-color: #cbbda5;
+
+  .showMore {
+    font-size: 14px;
   }
-  
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .poster {
-      width: 100%;
-      height: auto;
-    }
-  
-    .info {
-      max-width: 100%;
-    }
+
+  .buttonGroup {
+    justify-content: center;
+    gap: 0.5rem;
   }
-  
+
+  .button_watchLater {
+    justify-content: flex-start;
+  }
+}

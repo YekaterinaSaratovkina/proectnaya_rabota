@@ -1,32 +1,29 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react';
 import { getGenresFilmsApi } from '../../features/films/api/getGenresFilmsApi/getGenresFilmsApi';
-import Button from '../UI/Button/Button';
-import styles from './Filters.module.css'
 import { getCountriesFilmsApi } from '../../features/films/api/getCountriesFilmsApi/getCountriesFilmsApi';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import Home from '../../pages/Home/Home';
-import { PageRoutes } from '../../constans/PageRoutes';
+import Button from '../UI/Button/Button';
+import styles from './Filters.module.css';
+import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 
 const Filters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const { data: getGenresFilms, isLoading: genersIsLoading, } = useQuery({
-    queryKey: ["genresFilms"],
+  const { data: genres = [], isLoading: loadingGenres } = useQuery({
+    queryKey: ['genresFilms'],
     queryFn: getGenresFilmsApi,
   });
-
-  const { data: getCountriesFilms, isLoading: countriesIsLoading, } = useQuery({
-    queryKey: ["countriesFilms"],
+  const { data: countries = [], isLoading: loadingCountries } = useQuery({
+    queryKey: ['countriesFilms'],
     queryFn: getCountriesFilmsApi,
   });
 
-  const allCountries = getCountriesFilms ? getCountriesFilms.flat() : [];
-  const [selectedGenre, setSelectedGenre] = useState(() => searchParams.get("genre") || "");
-  const [selectedCountry, setSelectedCountry] = useState(() => searchParams.get("country") || "");
-  const [selectedAge, setSelectedAge] = useState(() => searchParams.get("age") || "");
-  const [selectedRating, setSelectedRating] = useState(() => searchParams.get("rating") || "");
-
+  const [selectedGenre, setSelectedGenre] = useState(searchParams.get('genre') || '');
+  const [selectedCountry, setSelectedCountry] = useState(searchParams.get('country') || '');
+  const [selectedAge, setSelectedAge] = useState(searchParams.get('age') || '');
+  const [selectedRating, setSelectedRating] = useState(searchParams.get('rating') || '');
 
   const ageOptions = [6, 12, 16, 18];
   const ratingOptions = [
@@ -35,19 +32,26 @@ const Filters = () => {
     { label: '7–10', value: '7-10' },
   ];
 
-  const navigate = useNavigate();
+  const handleApply = e => {
+    e.preventDefault();
 
-  const handleApply = (e) => {
-    e.preventDefault()
     const params = {};
-
     if (selectedGenre) params.genre = selectedGenre;
     if (selectedCountry) params.country = selectedCountry;
     if (selectedAge) params.age = selectedAge;
     if (selectedRating) params.rating = selectedRating;
-    console.log("УСТАНАВЛИВАЮ ПАРАМЕТРЫ:", params);
-    // navigate(PageRoutes.COMMON.MAIN);
-    setSearchParams(params);
+    params.apply = 'true';
+
+    const searchString = new URLSearchParams(params).toString();
+
+    if (location.pathname !== '/') {
+      navigate({
+        pathname: '/',
+        search: `?${searchString}`,
+      });
+    } else {
+      setSearchParams(params);
+    }
   };
 
   const handleReset = () => {
@@ -58,86 +62,96 @@ const Filters = () => {
     setSearchParams({});
   };
 
-
-  if (genersIsLoading || countriesIsLoading) {
-    return <div>"Загрузка..."</div>
+  if (loadingGenres || loadingCountries) {
+    return <div className={styles.loading}>Загрузка...</div>;
   }
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.header}>
-        <h1 className={styles.title}>Поиск по фильтрам:</h1>
-      </div>
 
-      <div className={styles.filterBlock}>
-        <label className={styles.dropdownLabel}>Возраст:</label>
+  return (
+    <form className={styles.wrapper} onSubmit={handleApply}>
+      <h2 className={styles.heading}>Поиск по фильтрам:</h2>
+
+      <div className={styles.filterRow}>
+        <label className={styles.label}>Возраст:</label>
         <div className={styles.buttonGroup}>
-          {ageOptions.map((age) => (
+          {ageOptions.map(age => (
             <Button
               key={age}
               name={`${age}+`}
               onClick={() =>
-                setSelectedAge((prev) => (prev === String(age) ? '' : String(age)))
+                setSelectedAge(prev => (prev === String(age) ? '' : String(age)))
               }
               variant={selectedAge === String(age) ? 'dark' : 'light'}
             />
           ))}
-
         </div>
       </div>
 
-      <div className={styles.filterBlock}>
-        <label className={styles.dropdownLabel}>Рейтинг:</label>
+      <div className={styles.filterRow}>
+        <label className={styles.label}>Рейтинг:</label>
         <div className={styles.buttonGroup}>
           {ratingOptions.map(({ label, value }) => (
             <Button
               key={value}
               name={label}
               onClick={() =>
-                setSelectedRating((prev) => (prev === value ? '' : value))
+                setSelectedRating(prev => (prev === value ? '' : value))
               }
               variant={selectedRating === value ? 'dark' : 'light'}
             />
           ))}
-
-
         </div>
       </div>
 
       <div className={styles.dropdownWrapper}>
-        <label htmlFor="countrySelect" className={styles.dropdownLabel}>Страна:</label>
-        <select
-          id="countrySelect"
-          className={styles.dropdownSelect}
+        <label htmlFor="countryInput" className={styles.label}>Страна:</label>
+        <input
+          id="countryInput"
+          list="countryList"
+          className={styles.dropdownInput}
+          placeholder="- не выбрано -"
           value={selectedCountry}
-          onChange={(e) => setSelectedCountry(e.target.value)}
-        >
-          <option value="">-не выбрано-</option>
-          {allCountries.map((country, index) => (
-            <option key={index} value={country.name}>{country.name}</option>
+          onChange={e => setSelectedCountry(e.target.value)}
+        />
+        <datalist id="countryList">
+          {countries.flat().map((c, i) => (
+            <option key={i} value={c.name} />
           ))}
-        </select>
+        </datalist>
       </div>
 
       <div className={styles.dropdownWrapper}>
-        <label htmlFor="genreSelect" className={styles.dropdownLabel}>Жанр:</label>
-        <select
-          id="genreSelect"
-          className={styles.dropdownSelect}
+        <label htmlFor="genreInput" className={styles.label}>Жанр:</label>
+        <input
+          id="genreInput"
+          list="genreList"
+          className={styles.dropdownInput}
+          placeholder="- не выбрано -"
           value={selectedGenre}
-          onChange={(e) => setSelectedGenre(e.target.value)}
-        >
-          <option value="">-не выбрано-</option>
-          {getGenresFilms?.map((g) => (
-            <option key={g.id} value={g.name}>{g.name}</option>
+          onChange={e => setSelectedGenre(e.target.value)}
+        />
+        <datalist id="genreList">
+          {genres.map(g => (
+            <option key={g.id} value={g.name} />
           ))}
-        </select>
+        </datalist>
       </div>
 
-      <button className={styles.applyButton} onClick={handleApply}>Применить</button>
-      <button className={styles.resetButton} onClick={handleReset}>Сбросить</button>
-
-    </div>
+      <div className={styles.actions}>
+        <Button
+          type="submit"
+          className={styles.applyButton}
+          name="Применить"
+        />
+        <Button
+          type="button"
+          className={styles.resetButton}
+          variant="light"
+          onClick={handleReset}
+          name="Сбросить"
+        />
+      </div>
+    </form>
   );
 };
 
-export default Filters
+export default Filters;

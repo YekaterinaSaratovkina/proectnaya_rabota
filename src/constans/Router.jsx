@@ -2,8 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import PageLayout from "../layouts/PageLayout";
 import { PageRoutes } from "./PageRoutes";
 import Home from "../pages/Home/Home";
-import Favorites from "../pages/Favorites/Favorites"
+import WatchLater from "../pages/WatchLater/WatchLater"
 import AboutTheFilm from "../pages/AboutTheFilm/AboutTheFilm"
+import NotFound from "../pages/NotFound/NotFound";
 
 const Router = createBrowserRouter([
     {
@@ -16,11 +17,14 @@ const Router = createBrowserRouter([
             },
             {
                 path: PageRoutes.CHOSEN.MAIN,
-                element: <Favorites />,
+                element: <WatchLater />,
             },
             {
                 path: PageRoutes.DETAILS.MAIN,
                 element: <AboutTheFilm />,
+            },
+            {
+                path: '*', element: <NotFound />
             },
         ],
     }

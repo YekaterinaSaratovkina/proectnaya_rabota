@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { API_KEY, FILMS_URL } from "../../../../constans/api";
 
-export const getFilmByFilters = async (filters) => {
-  console.log("Отправка фильтров в API:", filters);
+export const getFilmByFilters = async (filters, page = 1) => {
   const params = new URLSearchParams();
 
-  params.set("page", "1");
+  params.set("page", page.toString());
   params.set("limit", "10");
   params.set("type", "movie");
 
@@ -20,8 +19,5 @@ export const getFilmByFilters = async (filters) => {
     },
   });
 
-  console.log("ФИНАЛЬНЫЙ URL: ", `${FILMS_URL}v1.4/movie?${params.toString()}`);
-  console.log("ДАННЫЕ: ", data);
   return data;
-
 };

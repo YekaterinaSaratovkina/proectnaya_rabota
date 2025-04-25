@@ -1,54 +1,79 @@
-.container {
+.wrapper {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--colors__accent);
-    padding: 1rem 2rem;
-    border-radius: 1rem;
-    margin: 1rem 0 2rem 0;
-    flex-wrap: wrap;
-    gap: 1rem;
+.heading {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    color: #e6d7ad;
+    margin: 0 0 1rem;
 }
 
-.titel {
+.filterRow {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
     font-size: 1.5rem;
-    font-family: 'Playfair Display', serif;
+    font-weight: 600;
     color: var(--colors__white);
-    margin: 0;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
 }
 
 .dropdownWrapper {
-    margin: 16px 0;
     display: flex;
     flex-direction: column;
-    max-width: 300px;
+    gap: 0.5rem;
 }
 
-.dropdownLabel {
-    font-size: 16px;
-    margin-bottom: 8px;
-    color: #fff;
-}
-
-.dropdownSelect {
-    padding: 10px 12px;
-    font-size: 15px;
-    border-radius: 8px;
-    border: none;
-    background-color: #2c2c2c;
-    color: #fff;
-    appearance: none;
-    cursor: pointer;
-    box-shadow: 0 0 0 2px #f2c94c;
-}
-
-.dropdownSelect:focus {
+.dropdownInput {
+    padding: 0.6rem 1rem;
+    border: 2px solid var(--colors__border);
+    border-radius: 6px;
+    background-color: var(--colors__background);
+    color: var(--colors__white);
+    font-size: 1.4rem;
     outline: none;
-    box-shadow: 0 0 0 2px #f39c12;
+    transition: border-color 0.2s ease;
+}
+
+.dropdownInput:focus {
+    border-color: var(--colors__accent);
+}
+
+.dropdownInput::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.applyButton {
+    width: 100%;
+}
+
+.resetButton {
+    width: 100%;
+}
+
+.loading {
+    font-size: 1.2rem;
+    color: var(--colors__white);
+    text-align: center;
 }

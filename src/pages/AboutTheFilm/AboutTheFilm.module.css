@@ -1,0 +1,125 @@
+.container {
+    max-width: 1000px;
+    margin-bottom: 1rem;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    color: white;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+.backIcon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.backIcon:hover {
+    opacity: 0.6;
+}
+
+.content {
+    display: flex;
+    justify-content: start;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.poster {
+    width: 300px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.buttonGroup {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.button_watchLater {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0.3rem 0;
+}
+
+strong {
+    font-weight: 700;
+}
+
+.watchTitle {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: white;
+    margin: 2rem 0 1rem;
+}
+
+.playerWrapper {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playerImage {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.playerImage:hover {
+    transform: scale(1.02);
+}
+
+.loading {
+    text-align: center;
+    padding: 4rem;
+    font-size: 2rem;
+    color: white;
+}
+
+@media (max-width: 420px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+    } 
+
+    .buttonGroup { 
+        justify-content: center;
+    } 
+}

@@ -1,21 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Search.module.css';
-import { SearchIcon } from 'lucide-react';
-import { useSearchParams } from 'react-router-dom';
-import useDebounce from '../../hooks/useDebounce/useDebounce'
+import { SearchIcon, X } from 'lucide-react';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import useDebounce from '../../hooks/useDebounce/useDebounce';
 
 const Search = () => {
     const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
+    const location = useLocation();
     const [search, setSearch] = useState(searchParams.get("query") || "");
-    useDebounce(search, 500);
+    const debouncedSearch = useDebounce(search, 500);
+
+    const handleSearchSubmit = () => {
+        const currentParams = Object.fromEntries(searchParams.entries());
+
+        if (search) {
+            const newParams = { ...currentParams, query: search };
+
+            if (location.pathname !== '/') {
+                navigate({
+                    pathname: '/',
+                    search: `?${new URLSearchParams(newParams).toString()}`
+                });
+            } else {
+                setSearchParams(newParams);
+            }
+        } else {
+            const { query, ...rest } = currentParams;
+            setSearchParams(rest);
+        }
+    };
 
     useEffect(() => {
-        if (search) {
-            setSearchParams({ query: search })
-        } else {
-            setSearchParams({});
+        handleSearchSubmit();
+    }, [debouncedSearch]);
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSearchSubmit();
         }
-    }, [search, setSearchParams]);
+    };
 
     return (
         <div className={styles.wrapper}>
@@ -25,12 +49,28 @@ const Search = () => {
                 placeholder='Поиск...'
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                onKeyDown={handleKeyDown}
             />
-            <div className={styles.iconWrapper}>
+            {search && (
+                <div
+                    className={styles.clearIconWrapper}
+                    onClick={() => setSearch("")}
+                    role="button"
+                    tabIndex={0}
+                >
+                    <X className={styles.clearIcon} />
+                </div>
+            )}
+            <div
+                className={styles.iconWrapper}
+                onClick={handleSearchSubmit}
+                role="button"
+                tabIndex={0}
+            >
                 <SearchIcon className={styles.icon} />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Search
+export default Search;

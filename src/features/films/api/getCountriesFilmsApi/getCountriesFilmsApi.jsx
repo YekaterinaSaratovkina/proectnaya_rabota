@@ -8,6 +8,5 @@ export const getCountriesFilmsApi = async () => {
         }
     }
     );
-    
     return data;
 }

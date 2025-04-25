@@ -4,10 +4,10 @@ const CommonRoutes = {
     MAIN: home,
 }
 
-const favorites = "/favorites"
+const WatchLater = "/watch-later"
 
 const ChosenRouter = {
-    MAIN: favorites,
+    MAIN: WatchLater,
 }
 
 const details = "/film/:id"

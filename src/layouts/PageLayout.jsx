@@ -8,12 +8,12 @@ const PageLayout = () => {
   return (
     <div className={styles.wrapper}>
       <Header />
-      <div className={styles.item}></div>
+      <div className={styles.item}/>
       <div className={styles.content}>
         <div className={styles.sidebar}>
           <Sidebar />
         </div>
-        <div className={styles.item2}></div>
+        <div className={styles.item2}/>
         <div className={styles.outlet}>
           <Outlet />
         </div>

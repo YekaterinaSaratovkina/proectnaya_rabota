@@ -14,18 +14,29 @@
     align-items: center;
     gap: 1rem;
 }
-.content {
+
+.brand {
     display: flex;
     align-items: center;
-    font-family: Arial;
-    font-size: 3rem;
-    font-weight: 900;
-    color: var(--colors__accent)
+    gap: 0.3rem;
+    cursor: pointer;
 }
-.logo{
-    width: 70px;
-    background-color: var(--colors__accent);
-    border-radius: 100%;
+
+.logo {
+    width: 60px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.15));
+}
+
+.title {
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
 }
 
 .back {
@@ -40,11 +51,6 @@
 
 .back:hover {
     opacity: 0.7;
-}
-
-
-.favoritesIcon {
-    color: var(--colors__border);
 }
 
 .heading {
@@ -66,10 +72,10 @@
 }
 
 .favorites {
-    padding: 1.2rem;
-    border-radius: 100px;
-    border: 1px solid var(--colors__border);
-    background-color: var(--colors__accent);
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,4 +85,48 @@
 
 .favorites:hover {
     opacity: 0.7;
+}
+
+.favoritesIcon {
+    width: 100%;
+    height: auto;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.favoritesIcon:hover {
+    color: white;
+}
+
+@media (max-width: 420px) {
+    .header {
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .brand {
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .logo {
+        width: 40px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .headerBtns {
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .favorites {
+        width: 36px;
+        height: 36px;
+    }
+
+    .favoritesIcon {
+        width: 100%;
+    }
 }

@@ -1,0 +1,25 @@
+.header {
+    background-color: #1f1a1d;
+    padding: 20px 24px;
+    border-radius: 16px;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 24px;
+    font-family: 'Playfair Display', serif;
+    display: flex;
+    gap: 20px;
+    max-width: 100%;
+}
+
+.title, .filmsList {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    text-align: center;
+    color: #e6d7ad;
+}
+
+@media (min-width: 420px) {
+    .container {
+        margin-top: 1rem;
+    }
+
+}

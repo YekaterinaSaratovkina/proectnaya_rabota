@@ -4,7 +4,7 @@ import Filters from '../Filters/Filters'
 const Sidebar = () => {
   return (
     <div>
-        <Filters/>
+      <Filters />
     </div>
   )
 }
