@@ -12,6 +12,7 @@ export const getFilmByFilters = async (filters, page = 1) => {
   if (filters.age) params.set("ageRating", filters.age);
   if (filters.genre) params.set("genres.name", filters.genre);
   if (filters.country) params.set("countries.name", filters.country);
+  if (filters.year) params.set("year", filters.year);
 
   const { data } = await axios.get(`${FILMS_URL}v1.4/movie?${params.toString()}`, {
     headers: {

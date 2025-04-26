@@ -23,6 +23,7 @@ const Home = () => {
     setFilters({
       genre: searchParams.get("genre"),
       rating: searchParams.get("rating"),
+      year: searchParams.get("year"),
       age: searchParams.get("age"),
       country: searchParams.get("country"),
     });
@@ -44,7 +45,6 @@ const Home = () => {
     enabled: !!searchValue
   });
 
-
   const apply = searchParams.get("apply") === "true";
   const shouldUseFilters = apply && Object.values(filters).some(Boolean) && !searchValue;
 
@@ -55,7 +55,6 @@ const Home = () => {
     keepPreviousData: true,
     staleTime: 1000 * 60,
   });
-  console.log(filteredFilmsData);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

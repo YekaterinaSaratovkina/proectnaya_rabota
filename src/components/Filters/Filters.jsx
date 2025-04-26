@@ -22,6 +22,7 @@ const Filters = () => {
 
   const [selectedGenre, setSelectedGenre] = useState(searchParams.get('genre') || '');
   const [selectedCountry, setSelectedCountry] = useState(searchParams.get('country') || '');
+  const [selectedYear, setSelectedYear] = useState(searchParams.get('year') || '');
   const [selectedAge, setSelectedAge] = useState(searchParams.get('age') || '');
   const [selectedRating, setSelectedRating] = useState(searchParams.get('rating') || '');
 
@@ -38,6 +39,7 @@ const Filters = () => {
     const params = {};
     if (selectedGenre) params.genre = selectedGenre;
     if (selectedCountry) params.country = selectedCountry;
+    if (selectedYear) params.year = selectedYear;
     if (selectedAge) params.age = selectedAge;
     if (selectedRating) params.rating = selectedRating;
     params.apply = 'true';
@@ -57,6 +59,7 @@ const Filters = () => {
   const handleReset = () => {
     setSelectedGenre('');
     setSelectedCountry('');
+    setSelectedYear('');
     setSelectedAge('');
     setSelectedRating('');
     setSearchParams({});
@@ -101,6 +104,19 @@ const Filters = () => {
           ))}
         </div>
       </div>
+
+      <div className={styles.dropdownWrapper}>
+        <label htmlFor="yearInput" className={styles.label}>Год выпуска:</label>
+        <input
+          id="yearInput"
+          type="number"
+          className={styles.dropdownInput}
+          placeholder="- не выбрано -"
+          value={selectedYear}
+          onChange={e => setSelectedYear(e.target.value)}
+        />
+      </div>
+
 
       <div className={styles.dropdownWrapper}>
         <label htmlFor="countryInput" className={styles.label}>Страна:</label>
